@@ -1,0 +1,24 @@
+.search-area {
+  background-color: white;
+  margin-right: 40px;
+  padding: 3.5px 0px;
+}
+.search-area .search-btn {
+  background-color: #ccc;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  margin-left: 3px;
+  margin-top: -10px;
+  position: relative;
+  top: 4px;
+}
+.search-area .search-btn:hover {
+  cursor: pointer;
+}
+.search-area .search-box {
+  border: 2px solid rgba(66, 63, 63, 0.596);
+  border-radius: 5px;
+  margin-left: 10px;
+  width: 80%;
+}

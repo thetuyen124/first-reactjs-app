@@ -1,0 +1,108 @@
+.navbar {
+  padding: 1em;
+  position: fixed;
+  width: 100%;
+  transition: 0.7s cubic-bezier(0.28, 1.24, 0.76, 0.99);
+  z-index: 2;
+  color: #0087a1;
+}
+.navbar-logo {
+  float: left;
+}
+.navbar-logo img {
+  width: 80px;
+  position: relative;
+  left: 100%;
+}
+.navbar-collapse {
+  float: right;
+}
+.navbar-nav {
+  font-size: 0.8em;
+  list-style: none;
+  right: 20px;
+  position: relative;
+  top: 20px;
+}
+.navbar-nav li {
+  float: left;
+}
+.navbar-nav .logout-btn {
+  background-color: rgb(0, 0, 0, 0);
+  border: 0;
+  color: #038fe6;
+  font-family: unset;
+  font-weight: bold;
+  position: relative;
+  text-transform: uppercase;
+  top: 8px;
+}
+.navbar-nav .logout-btn:hover {
+  cursor: pointer;
+  color: rgb(255, 255, 255, 0.7);
+}
+.navbar-nav li a {
+  display: block;
+  font-weight: bold;
+  padding: 10px 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.navbar-nav li a:hover {
+  color: rgb(255, 255, 255, 0.7);
+}
+.nav-toggle {
+  color: white;
+  display: none;
+  float: right;
+  font-size: 20px;
+  position: absolute;
+  right: 40px;
+  top: 35px;
+  z-index: 3;
+}
+
+@media screen and (max-width: 800px) {
+  .navbar .navbar-collapse .navbar-nav li a:hover {
+    color: rgb(255, 255, 255, 0.7);
+  }
+  .navbar-nav .logout-btn {
+    color: #0087a1;
+    font-size: 17px;
+    display: flex;
+    margin-left: 14px;
+  }
+  .navbar-nav .logout-btn:hover {
+    color: rgb(255, 255, 255, 0.7);
+  }
+  .nav-toggle {
+    display: unset;
+  }
+
+  .navbar-collapse {
+    background-color: rgb(17 30 42);
+    box-shadow: -1px 0 4px hsla(255, 64%, 15%, 0.15);
+    height: 100%;
+    position: fixed;
+    padding: 50px;
+    right: -100%;
+    top: 0;
+    transition: 0.7s ease-in;
+    width: 45%;
+    z-index: 2;
+    margin: 0;
+  }
+
+  .navbar .navbar-collapse .navbar-nav {
+    display: flex;
+    flex-direction: column;
+    row-gap: 3rem;
+  }
+  .navbar .navbar-collapse .navbar-nav li a {
+    color: #0087a1;
+    font-size: 17px;
+  }
+  .navbar-logo img {
+    left: 35px;
+  }
+}

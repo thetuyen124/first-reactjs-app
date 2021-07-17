@@ -1,0 +1,35 @@
+.clearFix {
+  clear: both;
+}
+.mastHead {
+  background-image: url("../../IMG/bg-img.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  /* margin-bottom: 100px; */
+}
+.mastHead .overlay {
+  background-color: black;
+  height: 100%;
+  opacity: 40%;
+  position: absolute;
+  width: 100%;
+}
+.container {
+  position: relative;
+}
+.page-heading {
+  color: lemonchiffon;
+  margin-bottom: 40px;
+  padding: 10.5em 0;
+  text-align: center;
+}
+.page-heading h1 {
+  color: lemonchiffon;
+  font-size: 90px;
+  font-family: "Lora", serif;
+  margin-bottom: 20px;
+}
+.page-heading .subheading {
+  font-size: 25px;
+}

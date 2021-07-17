@@ -1,0 +1,13 @@
+.welcome {
+  align-content: center;
+  color: rgb(99, 99, 99);
+  text-align: center;
+}
+.welcome h1 {
+  font-size: 40px;
+}
+.welcome h3 {
+  font-size: 25px;
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
