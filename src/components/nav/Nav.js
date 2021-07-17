@@ -29,9 +29,9 @@ const Nav = (props) => {
   return (
     <div>
       <nav className="navbar" id="navbar">
-        <a className="navbar-logo" href="/">
+        <Link className="navbar-logo" onClick={close} to="/">
           <img src={logo} alt="logo" />
-        </a>
+        </Link>
         {!click ? (
           <MenuOutlined onClick={handleClick} className="nav-toggle" />
         ) : (
