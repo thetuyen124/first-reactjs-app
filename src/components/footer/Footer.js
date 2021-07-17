@@ -7,17 +7,17 @@ const Footer = () => {
     <footer className="footer">
       <hr />
       <div className="social-footer">
-        <a className="a-link" href="fb.com">
+        <a className="a-link" href="https://fb.com">
           <FacebookIcon className="social" />
         </a>
-        <a className="a-link" href="github.com">
+        <a className="a-link" href="https://github.com">
           <GitHubIcon className="social" />
         </a>
-        <a className="a-link" href="instagram.com">
+        <a className="a-link" href="https://instagram.com">
           <InstagramIcon className="social" />
         </a>
       </div>
-      <span className="copyright">Copyright © sdmf s,dmvsv</span>
+      <span className="copyright">Copyright © ...</span>
     </footer>
   );
 };
