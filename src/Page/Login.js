@@ -9,6 +9,7 @@ const Login = (props) => {
   const { message, setIsLogin } = props;
 
   const [disable, setDisable] = useState(false);
+  const [error, setError] = useState(true);
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [email, setEmail] = useState("");
@@ -23,7 +24,7 @@ const Login = (props) => {
       setEmailError("Required");
       return;
     } else if (
-      !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+      !/^(([^<>()\\.,;:\s@"]+(\.[^<>()\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
         email
       )
     ) {
@@ -31,6 +32,7 @@ const Login = (props) => {
       return;
     }
     setEmailError("");
+    setError(false);
   };
 
   const validEmailChange = (evt) => {
@@ -52,26 +54,28 @@ const Login = (props) => {
       return;
     }
     setPasswordError("");
+    setError(false);
   };
 
   const login = () => {
-    if (emailError === "" && passwordError === "") {
+    if (!error) {
       setDisable(true);
-      axios
-        .get("https://60dff0ba6b689e001788c858.mockapi.io/token")
-        .then((response) => {
-          localStorage.clear();
-          localStorage.setItem("token", response.data.token);
-          localStorage.setItem("userId", response.data.userId);
-          console.log(response);
-          setLoginState("Login success.");
-          setIsLogin(true);
-          setDisable(false);
-        })
-        .catch((error) => {
-          setDisable(false);
-          setLoginState(error);
-        });
+      if (loginState === "") {
+        axios
+          .get("https://60dff0ba6b689e001788c858.mockapi.io/token")
+          .then((response) => {
+            localStorage.clear();
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("userId", response.data.userId);
+            setLoginState("Login success.");
+            setIsLogin(true);
+            setDisable(false);
+          })
+          .catch((error) => {
+            setDisable(false);
+            setLoginState(error);
+          });
+      } else setDisable(false);
     }
   };
 
@@ -88,7 +92,7 @@ const Login = (props) => {
           value={email}
         ></input>
 
-        {!emailError == "" ? (
+        {!(emailError === "") ? (
           <Alert message={emailError} type="error" showIcon />
         ) : (
           ""
@@ -103,7 +107,7 @@ const Login = (props) => {
           type="password"
           value={password}
         ></input>
-        {!passwordError == "" ? (
+        {!(passwordError === "") ? (
           <Alert message={passwordError} type="error" showIcon />
         ) : (
           ""
@@ -112,7 +116,7 @@ const Login = (props) => {
       <button disabled={disable} onClick={login}>
         Submit
       </button>
-      {!loginState == "" ? (
+      {!(loginState === "") ? (
         <Alert message={loginState} type="success" showIcon />
       ) : (
         ""

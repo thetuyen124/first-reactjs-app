@@ -21,7 +21,6 @@ const Pokemon = () => {
       .get(`https://pokeapi.co/api/v2/pokemon/${currentPokemonId}`)
       .then(function (response) {
         setIsLoading(false);
-        console.log(response);
         setPokemon({
           name: response.data.name,
           height: response.data.height,

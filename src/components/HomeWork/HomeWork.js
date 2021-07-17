@@ -10,9 +10,8 @@ const HomeWork = () => {
   const [controlView, setControlView] = useState(1);
   const [value, setValue] = useState(1);
 
-  const arrTitle = ["", "Welcome page", "Counter page", "Pokemon page"];
-
   useEffect(() => {
+    const arrTitle = ["", "Welcome page", "Counter page", "Pokemon page"];
     // Update the document title using the browser API
     document.title = arrTitle[controlView];
   }, [controlView]);

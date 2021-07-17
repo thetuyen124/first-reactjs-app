@@ -18,7 +18,7 @@ const PostDetail = (props) => {
         });
         setIsLoading(false);
       });
-  }, []);
+  }, [id]);
   if (isLoading) {
     return (
       <div style={{ textAlign: "center", marginBottom: 50 }}>

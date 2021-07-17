@@ -21,6 +21,7 @@ const TablePost = (props) => {
         return post2.title.localeCompare(post1.title);
       });
       break;
+    default:
   }
   return listPost.map((post) => {
     return (

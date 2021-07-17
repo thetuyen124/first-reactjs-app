@@ -17,13 +17,12 @@ const Profile = (props) => {
       axios
         .get(`https://60dff0ba6b689e001788c858.mockapi.io/users/${userId}`)
         .then((response) => {
-          console.log(response);
           setName(response.data.name);
           setId(response.data.id);
           setIsLoading(false);
         });
     }
-  }, [isLogin]);
+  }, [isLogin, userId]);
 
   useEffect(() => {
     document.title = "Profile";

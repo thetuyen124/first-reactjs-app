@@ -11,12 +11,14 @@
   cursor: pointer;
 }
 .footer .copyright {
+  bottom: 25px;
   color: rgb(0, 0, 0, 0.5);
   display: block;
   font-weight: 400;
   font-family: serif;
   font-size: 15px;
   margin: 0px 10px 50px 10px;
+  position: relative;
   text-align: center;
 }
 .a-link {

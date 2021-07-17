@@ -29,7 +29,7 @@ const Nav = (props) => {
   return (
     <div>
       <nav className="navbar" id="navbar">
-        <a className="navbar-logo" href="#">
+        <a className="navbar-logo" href="/">
           <img src={logo} alt="logo" />
         </a>
         {!click ? (

@@ -24,7 +24,7 @@ const Post = () => {
         p.title.toLowerCase().includes(searchTerm.toLowerCase())
       )
     );
-  }, [searchTerm]);
+  }, [searchTerm, listPost]);
   useEffect(() => {
     axios
       .get("https://jsonplaceholder.typicode.com/posts")
