@@ -4,6 +4,7 @@ import { Spin, Empty } from "antd";
 
 import TablePost from "../components/tablePost/TablePost";
 import SearchInput from "../components/searchInput/SearchInput";
+import Login from "./Login";
 
 const Post = () => {
   const arrSort = ["(NONE)", "ASC", "DESC"];
@@ -38,7 +39,9 @@ const Post = () => {
         console.log(error);
       });
   }, []);
-
+  if (localStorage.getItem("token") === null) {
+    return <Login message="You need to login to continue" />;
+  }
   if (isLoading) {
     return (
       <div style={{ textAlign: "center", marginBottom: 50 }}>

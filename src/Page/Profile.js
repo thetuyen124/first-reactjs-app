@@ -5,15 +5,17 @@ import Login from "./Login";
 
 import "antd/dist/antd.css";
 const Profile = (props) => {
-  const { isLogin, setIsLogin } = props;
   const [isLoading, setIsLoading] = useState(true);
   const [name, setName] = useState("");
   const [id, setId] = useState(null);
 
   const userId = localStorage.getItem("userId");
+  console.log(userId);
+  console.log(localStorage.getItem("token"));
+  console.log(localStorage.getItem("token") !== null);
 
   useEffect(() => {
-    if (isLogin) {
+    if (localStorage.getItem("token") !== null) {
       axios
         .get(`https://60dff0ba6b689e001788c858.mockapi.io/users/${userId}`)
         .then((response) => {
@@ -22,16 +24,14 @@ const Profile = (props) => {
           setIsLoading(false);
         });
     }
-  }, [isLogin, userId]);
+  }, [userId]);
 
   useEffect(() => {
     document.title = "Profile";
   }, []);
 
-  if (!isLogin) {
-    return (
-      <Login setIsLogin={setIsLogin} message="You need to login to continue" />
-    );
+  if (userId === null) {
+    return <Login message="You need to login to continue" />;
   }
   if (isLoading) {
     return (

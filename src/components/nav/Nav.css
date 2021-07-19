@@ -14,17 +14,17 @@
   position: relative;
   left: 100%;
 }
-.navbar-collapse {
+.navbar-item {
   float: right;
 }
-.navbar-nav {
+.navbar .navbar-item .navbar-nav {
   font-size: 0.8em;
+  flex-direction: unset;
   list-style: none;
   right: 20px;
   position: relative;
-  top: 20px;
 }
-.navbar-nav li {
+.navbar .navbar-item .navbar-nav li {
   float: left;
 }
 .navbar-nav .logout-btn {
@@ -35,7 +35,6 @@
   font-weight: bold;
   position: relative;
   text-transform: uppercase;
-  top: 8px;
 }
 .navbar-nav .logout-btn:hover {
   cursor: pointer;
@@ -63,7 +62,7 @@
 }
 
 @media screen and (max-width: 800px) {
-  .navbar .navbar-collapse .navbar-nav li a:hover {
+  .navbar .navbar-item .navbar-nav li a:hover {
     color: rgb(255, 255, 255, 0.7);
   }
   .navbar-nav .logout-btn {
@@ -79,7 +78,7 @@
     display: unset;
   }
 
-  .navbar-collapse {
+  .navbar-item {
     background-color: rgb(17 30 42);
     box-shadow: -1px 0 4px hsla(255, 64%, 15%, 0.15);
     height: 100%;
@@ -93,12 +92,12 @@
     margin: 0;
   }
 
-  .navbar .navbar-collapse .navbar-nav {
+  .navbar .navbar-item .navbar-nav {
     display: flex;
     flex-direction: column;
     row-gap: 3rem;
   }
-  .navbar .navbar-collapse .navbar-nav li a {
+  .navbar .navbar-item .navbar-nav li a {
     color: #0087a1;
     font-size: 17px;
   }

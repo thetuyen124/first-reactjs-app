@@ -7,22 +7,22 @@ import logo from "../../IMG/logo.png";
 import "./Nav.css";
 
 const Nav = (props) => {
-  const { isLogin, setIsLogin } = props;
   const [click, setClick] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
   const handleClick = () => {
     setClick(!click);
     if (!click) {
-      document.querySelector(".navbar-collapse").style.right = "0";
+      document.querySelector(".navbar-item").style.right = "0";
     }
     if (click) {
-      document.querySelector(".navbar-collapse").style.right = "-100%";
+      document.querySelector(".navbar-item").style.right = "-100%";
     }
   };
   const close = () => {
     if (click) {
       setClick(!click);
-      document.querySelector(".navbar-collapse").style.right = "-100%";
+      document.querySelector(".navbar-item").style.right = "-100%";
     }
   };
 
@@ -37,7 +37,7 @@ const Nav = (props) => {
         ) : (
           ""
         )}
-        <div className="navbar-collapse">
+        <div className="navbar-item">
           {click ? (
             <CloseOutlined onClick={handleClick} className="nav-toggle" />
           ) : (
@@ -64,7 +64,7 @@ const Nav = (props) => {
                 Profile
               </Link>
             </li>
-            {!isLogin ? (
+            {token === null ? (
               <li className="nav-item">
                 <Link onClick={close} to="/login">
                   Login
@@ -76,7 +76,8 @@ const Nav = (props) => {
                 onClick={() => {
                   close();
                   localStorage.clear();
-                  setIsLogin(false);
+                  setToken(null);
+                  window.location.href = "/login";
                 }}
               >
                 Logout
