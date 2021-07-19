@@ -6,7 +6,7 @@ import HomePage from "./HomePage";
 import Login from "./Login";
 import Post from "./Post";
 import Profile from "./Profile.js";
-import HomeWork from "../components/homeWork/HomeWork";
+import HomeWork from "../components/HomeWork/HomeWork";
 import PostDetail from "./PostDetail";
 
 const Content = (props) => {
