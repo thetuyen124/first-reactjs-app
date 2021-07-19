@@ -10,8 +10,6 @@ const Profile = (props) => {
   const [id, setId] = useState(null);
 
   const token = localStorage.getItem("token");
-  console.log(localStorage.getItem("token"));
-  console.log(localStorage.getItem("token") !== null);
 
   useEffect(() => {
     if (token !== null) {
