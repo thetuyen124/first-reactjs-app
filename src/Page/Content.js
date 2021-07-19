@@ -8,6 +8,7 @@ import Post from "./Post";
 import Profile from "./Profile.js";
 import HomeWork from "../components/HomeWork/HomeWork";
 import PostDetail from "./PostDetail";
+import SignUp from "./SignUp";
 
 const Content = (props) => {
   return (
@@ -29,6 +30,9 @@ const Content = (props) => {
       </Route>
       <Route path="/post/:id">
         <PostDetail />
+      </Route>
+      <Route path="/signup">
+        <SignUp />
       </Route>
     </Switch>
   );

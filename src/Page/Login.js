@@ -2,7 +2,6 @@ import axios from "axios";
 
 import { Formik } from "formik";
 
-import "antd/dist/antd.css";
 import { Form, Button } from "react-bootstrap";
 
 const Login = (props) => {
@@ -29,7 +28,6 @@ const Login = (props) => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          setSubmitting(true);
           axios
             .get("https://60dff0ba6b689e001788c858.mockapi.io/token")
             .then((response) => {

@@ -65,11 +65,18 @@ const Nav = (props) => {
               </Link>
             </li>
             {token === null ? (
-              <li className="nav-item">
-                <Link onClick={close} to="/login">
-                  Login
-                </Link>
-              </li>
+              <>
+                <li className="nav-item">
+                  <Link onClick={close} to="/login">
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link onClick={close} to="/signup">
+                    Sign Up
+                  </Link>
+                </li>
+              </>
             ) : (
               <button
                 className="logout-btn"
