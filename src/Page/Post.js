@@ -5,6 +5,7 @@ import { Spin, Empty } from "antd";
 import TablePost from "../components/tablePost/TablePost";
 import SearchInput from "../components/searchInput/SearchInput";
 import Login from "./Login";
+import { Table } from "react-bootstrap";
 
 const Post = () => {
   const arrSort = ["(NONE)", "ASC", "DESC"];
@@ -53,14 +54,14 @@ const Post = () => {
     return (
       <div className="mainContent">
         <SearchInput searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        <Empty />;
+        <Empty />
       </div>
     );
   }
   return (
-    <div className="mainContent">
+    <div className="mainContent container">
       <SearchInput searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <table className="post-table">
+      <Table className="post-table" striped bordered hover>
         <thead>
           <tr className="table-header">
             <td style={{ width: 40 }}>Id</td>
@@ -77,7 +78,7 @@ const Post = () => {
         <tbody>
           <TablePost listPost={result} sort={sort} />
         </tbody>
-      </table>
+      </Table>
     </div>
   );
 };
