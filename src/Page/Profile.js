@@ -9,28 +9,31 @@ const Profile = (props) => {
   const [name, setName] = useState("");
   const [id, setId] = useState(null);
 
-  const userId = localStorage.getItem("userId");
-  console.log(userId);
+  const token = localStorage.getItem("token");
   console.log(localStorage.getItem("token"));
   console.log(localStorage.getItem("token") !== null);
 
   useEffect(() => {
-    if (localStorage.getItem("token") !== null) {
+    if (token !== null) {
       axios
-        .get(`https://60dff0ba6b689e001788c858.mockapi.io/users/${userId}`)
+        .get(
+          `https://60dff0ba6b689e001788c858.mockapi.io/users/${localStorage.getItem(
+            "userId"
+          )}`
+        )
         .then((response) => {
           setName(response.data.name);
           setId(response.data.id);
           setIsLoading(false);
         });
     }
-  }, [userId]);
+  }, [token]);
 
   useEffect(() => {
     document.title = "Profile";
   }, []);
 
-  if (userId === null) {
+  if (token === null) {
     return <Login message="You need to login to continue" />;
   }
   if (isLoading) {
