@@ -9,6 +9,7 @@ import Profile from "./Profile.js";
 import HomeWork from "../components/HomeWork/HomeWork";
 import PostDetail from "./PostDetail";
 import SignUp from "./SignUp";
+import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 
 const Content = (props) => {
   return (
@@ -16,21 +17,24 @@ const Content = (props) => {
       <Route path="/" exact>
         <HomePage />
       </Route>
-      <Route path="/post" exact>
+      <PrivateRoute path="/post" exact component={Post} />
+      {/* <Route path="/post" exact>
         <Post />
-      </Route>
-      <Route path="/profile">
+      </Route> */}
+      <PrivateRoute path="/profile" component={Profile} />
+      {/* <Route path="/profile">
         <Profile />
-      </Route>
+      </Route> */}
       <Route path="/exercise">
         <HomeWork />
       </Route>
       <Route path="/login">
         <Login />
       </Route>
-      <Route path="/post/:id">
+      <PrivateRoute path="/post/:id" exact component={PostDetail} />
+      {/* <Route path="/post/:id">
         <PostDetail />
-      </Route>
+      </Route> */}
       <Route path="/signup">
         <SignUp />
       </Route>

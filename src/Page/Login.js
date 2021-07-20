@@ -5,10 +5,8 @@ import { Formik } from "formik";
 import { Form, Button } from "react-bootstrap";
 
 const Login = (props) => {
-  const { message } = props;
   return (
     <div className="mainContent container">
-      <h1 style={{ fontSize: 35 }}>{message}</h1>
       <Formik
         initialValues={{ email: "", password: "" }}
         validate={(values) => {

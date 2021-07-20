@@ -1,7 +1,14 @@
 import { useEffect } from "react";
 
 import { Formik } from "formik";
-import { Form, Button, ButtonGroup, ToggleButton } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  ButtonGroup,
+  ToggleButton,
+  InputGroup,
+  FormControl,
+} from "react-bootstrap";
 const SignUp = () => {
   useEffect(() => {
     document.title = "Sign Up";
@@ -18,6 +25,7 @@ const SignUp = () => {
           passwordRT: "",
           username: "",
           gender: "Male",
+          checked: false,
         }}
         validate={(values) => {
           const errors = {};
@@ -149,8 +157,26 @@ const SignUp = () => {
                 {errors.passwordRT}
               </Form.Control.Feedback>
             </Form.Group>
-
-            <Button variant="primary" type="submit" disabled={isSubmitting}>
+            <ButtonGroup className="mb-2">
+              <ToggleButton
+                className="mb-2"
+                checked={values.checked}
+                id="toggle-check"
+                name="checked"
+                onChange={handleChange}
+                type="checkbox"
+                variant="outline-primary"
+                value="1"
+              >
+                I have read agreement
+              </ToggleButton>
+            </ButtonGroup>
+            <br />
+            <Button
+              variant="primary"
+              type="submit"
+              disabled={!values.checked || isSubmitting}
+            >
               Submit
             </Button>
           </Form>

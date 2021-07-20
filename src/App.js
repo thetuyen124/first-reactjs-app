@@ -1,6 +1,4 @@
-import "./App.css";
 import "./reset.css";
-import "./custom.css";
 import "antd/dist/antd.css";
 
 import { BrowserRouter as Router } from "react-router-dom";
