@@ -1,4 +1,5 @@
-import { React, useEffect } from "react";
+import { useEffect } from "react";
+import React from "react";
 
 const HomePage = () => {
   useEffect(() => {

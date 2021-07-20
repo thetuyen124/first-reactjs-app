@@ -2,7 +2,7 @@
   clear: both;
 }
 .mastHead {
-  background-image: url("../../IMG/bg-img.jpg");
+  background-image: url("https://raw.githubusercontent.com/thetuyen124/first-reactjs-app/master/src/IMG/bg-img.jpg");
   background-size: cover;
   background-position: center;
   position: relative;
