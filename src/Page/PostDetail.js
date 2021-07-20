@@ -7,7 +7,7 @@ import React from "react";
 
 const PostDetail = (props) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [post, setPost] = useState({ id: null, title: null, body: null });
+  const [post, setPost] = useState({ id: null, title: "Post", body: null });
   let { id } = useParams();
 
   useEffect(() => {
@@ -22,6 +22,10 @@ const PostDetail = (props) => {
         setIsLoading(false);
       });
   }, [id]);
+
+  useEffect(() => {
+    document.title = post.title;
+  }, [post.title]);
   if (localStorage.getItem("token") === null) {
     return <Login message="You need to login to continue" />;
   }
