@@ -18,23 +18,14 @@ const Content = (props) => {
         <HomePage />
       </Route>
       <PrivateRoute path="/post" exact component={Post} />
-      {/* <Route path="/post" exact>
-        <Post />
-      </Route> */}
       <PrivateRoute path="/profile" component={Profile} />
-      {/* <Route path="/profile">
-        <Profile />
-      </Route> */}
+      <PrivateRoute path="/post/:id" exact component={PostDetail} />
       <Route path="/exercise">
         <HomeWork />
       </Route>
       <Route path="/login">
         <Login />
       </Route>
-      <PrivateRoute path="/post/:id" exact component={PostDetail} />
-      {/* <Route path="/post/:id">
-        <PostDetail />
-      </Route> */}
       <Route path="/signup">
         <SignUp />
       </Route>
