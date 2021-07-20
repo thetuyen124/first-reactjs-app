@@ -6,9 +6,9 @@ import HomePage from "./HomePage";
 import Login from "./Login";
 import Post from "./Post";
 import Profile from "./Profile.js";
-import HomeWork from "../components/HomeWork/HomeWork";
 import PostDetail from "./PostDetail";
 import SignUp from "./SignUp";
+import EditPost from "./EditPost";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 
 const Content = (props) => {
@@ -20,9 +20,7 @@ const Content = (props) => {
       <PrivateRoute path="/post" exact component={Post} />
       <PrivateRoute path="/profile" component={Profile} />
       <PrivateRoute path="/post/:id" exact component={PostDetail} />
-      <Route path="/exercise">
-        <HomeWork />
-      </Route>
+      <PrivateRoute path="/post/edit/:id" exact component={EditPost} />
       <Route path="/login">
         <Login />
       </Route>

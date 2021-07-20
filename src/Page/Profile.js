@@ -13,8 +13,8 @@ const Profile = (props) => {
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
   useEffect(() => {
-    if (token !== null) {
-      let didCancel = false;
+    let didCancel = false;
+    if (token !== null && !didCancel) {
       axios
         .get(`https://60dff0ba6b689e001788c858.mockapi.io/users/${userId}`, {
           headers: {
@@ -22,15 +22,17 @@ const Profile = (props) => {
           },
         })
         .then((response) => {
-          setName(response.data.name);
-          setId(response.data.id);
-          setIsLoading(false);
+          if (!didCancel) {
+            setName(response.data.name);
+            setId(response.data.id);
+            setIsLoading(false);
+          }
         });
       axios.defaults.headers.common["Authorization"] = token;
-      return () => {
-        didCancel = true;
-      };
     }
+    return () => {
+      didCancel = true;
+    };
   }, [token, userId]);
 
   useEffect(() => {

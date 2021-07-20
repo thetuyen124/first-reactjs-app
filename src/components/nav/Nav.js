@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import React from "react";
 import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
+import "./Nav.css";
 
 const logo =
   "https://raw.githubusercontent.com/thetuyen124/first-reactjs-app/master/src/IMG/logo.png";
-import "./Nav.css";
 
 const Nav = (props) => {
   const [click, setClick] = useState(false);
@@ -48,11 +48,6 @@ const Nav = (props) => {
             <li className="nav-item">
               <Link onClick={close} to="/">
                 Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link onClick={close} to="/exercise">
-                Exercise
               </Link>
             </li>
             <li className="nav-item">

@@ -5,7 +5,7 @@ import { Formik } from "formik";
 import React from "react";
 import { Form, Button } from "react-bootstrap";
 
-const Login = (title) => {
+const Login = (props) => {
   return (
     <div className="mainContent container">
       <Formik

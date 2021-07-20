@@ -73,7 +73,7 @@ const SignUp = () => {
           /* and other goodies */
         }) => (
           <Form className="sign-form" onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formBasicUsername">
+            <Form.Group className="mb-3">
               <Form.Label>Username</Form.Label>
               <Form.Control
                 type="text"
@@ -89,7 +89,7 @@ const SignUp = () => {
                 {errors.username}
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className="mb-3">
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 type="email"
@@ -122,7 +122,7 @@ const SignUp = () => {
               ))}
             </ButtonGroup>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group className="mb-3">
               <Form.Label>Enter Password</Form.Label>
               <Form.Control
                 type="password"
@@ -138,7 +138,7 @@ const SignUp = () => {
                 {errors.password}
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group className="mb-3">
               <Form.Label>Retype Password</Form.Label>
               <Form.Control
                 type="password"
