@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Spin } from "antd";
 import Login from "./Login";
+import React from "react";
 
 import "antd/dist/antd.css";
 const Profile = (props) => {
@@ -10,22 +11,27 @@ const Profile = (props) => {
   const [id, setId] = useState(null);
 
   const token = localStorage.getItem("token");
-
+  const userId = localStorage.getItem("userId");
   useEffect(() => {
     if (token !== null) {
+      let didCancel = false;
       axios
-        .get(
-          `https://60dff0ba6b689e001788c858.mockapi.io/users/${localStorage.getItem(
-            "userId"
-          )}`
-        )
+        .get(`https://60dff0ba6b689e001788c858.mockapi.io/users/${userId}`, {
+          headers: {
+            Authorization: token,
+          },
+        })
         .then((response) => {
           setName(response.data.name);
           setId(response.data.id);
           setIsLoading(false);
         });
+      axios.defaults.headers.common["Authorization"] = token;
+      return () => {
+        didCancel = true;
+      };
     }
-  }, [token]);
+  }, [token, userId]);
 
   useEffect(() => {
     document.title = "Profile";

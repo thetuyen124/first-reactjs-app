@@ -1,6 +1,6 @@
 import Nav from "../nav/Nav.js";
 import "./Header.css";
-
+import React from "react";
 const Header = (props) => {
   return (
     <header className="mastHead">

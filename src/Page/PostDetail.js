@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Login from "./Login";
+import React from "react";
 
 const PostDetail = (props) => {
   const [isLoading, setIsLoading] = useState(true);

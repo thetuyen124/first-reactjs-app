@@ -2,6 +2,7 @@ import "./Footer.css";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import InstagramIcon from "@material-ui/icons/Instagram";
+import React from "react";
 const Footer = () => {
   return (
     <footer className="footer">

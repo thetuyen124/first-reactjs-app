@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Spin, Empty } from "antd";
+import React from "react";
 
 import TablePost from "../components/tablePost/TablePost";
 import SearchInput from "../components/searchInput/SearchInput";

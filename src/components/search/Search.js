@@ -1,6 +1,6 @@
 import "./Search.css";
 import SearchIcon from "@material-ui/icons/Search";
-
+import React from "react";
 const Search = () => {
   return (
     <div className="search-area">

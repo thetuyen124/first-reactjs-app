@@ -1,3 +1,4 @@
+import React from "react";
 const Social = (props) => {
   const { alt, src } = props;
   return (

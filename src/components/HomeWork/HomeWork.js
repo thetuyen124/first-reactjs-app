@@ -3,7 +3,7 @@ import "./homework.css";
 import Welcome from "../welcome/Welcome";
 import Counter from "../counter/Counter";
 import Pokemon from "../pokemon/Pokemon";
-
+import React from "react";
 import { useState, useEffect } from "react";
 
 const HomeWork = () => {

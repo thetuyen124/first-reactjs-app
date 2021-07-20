@@ -2,9 +2,10 @@ import axios from "axios";
 
 import { Formik } from "formik";
 
+import React from "react";
 import { Form, Button } from "react-bootstrap";
 
-const Login = (props) => {
+const Login = (title) => {
   return (
     <div className="mainContent container">
       <Formik
@@ -50,7 +51,7 @@ const Login = (props) => {
           isSubmitting,
           /* and other goodies */
         }) => (
-          <Form onSubmit={handleSubmit}>
+          <Form className="sign-form" onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control

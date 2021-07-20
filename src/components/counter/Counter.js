@@ -1,4 +1,5 @@
 import "./Counter.css";
+import React from "react";
 
 const Counter = (props) => {
   const { value, handleMinus, handleAdd } = props;

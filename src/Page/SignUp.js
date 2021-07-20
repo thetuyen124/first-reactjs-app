@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 
+import React from "react";
 import { Formik } from "formik";
 import { Form, Button, ButtonGroup, ToggleButton } from "react-bootstrap";
 const SignUp = () => {
@@ -22,6 +23,7 @@ const SignUp = () => {
         }}
         validate={(values) => {
           const errors = {};
+
           if (!values.email) {
             errors.email = "Required";
           } else if (
@@ -29,6 +31,7 @@ const SignUp = () => {
           ) {
             errors.email = "Invalid email address";
           }
+
           if (!values.password) {
             errors.password = "Required";
           } else if (values.password.length <= 7) {
@@ -46,6 +49,7 @@ const SignUp = () => {
           if (values.password !== values.passwordRT) {
             errors.passwordRT = "Password not match";
           }
+
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
@@ -68,7 +72,7 @@ const SignUp = () => {
           isSubmitting,
           /* and other goodies */
         }) => (
-          <Form onSubmit={handleSubmit}>
+          <Form className="sign-form" onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicUsername">
               <Form.Label>Username</Form.Label>
               <Form.Control
@@ -150,29 +154,26 @@ const SignUp = () => {
                 {errors.passwordRT}
               </Form.Control.Feedback>
             </Form.Group>
-            <ToggleButton
-              className="mb-2"
-              checked={values.checked}
-              id="toggle-check"
-              name="checked"
-              onChange={handleChange}
-              type="checkbox"
-              variant="secondary"
-              value="1"
-              style={{ border: 0, backgroundColor: "unset", color: "black" }}
-            >
-              I have read agreement
-            </ToggleButton>
-            <br />
+            <Form.Group>
+              <Form.Check
+                checked={values.checked}
+                feedback="You must agree before submitting."
+                label="Agree to terms and conditions"
+                name="checked"
+                required
+                onChange={handleChange}
+              />
+            </Form.Group>
+
             <Button
               variant="primary"
               type="submit"
               disabled={
                 !values.checked ||
-                !!errors.email ||
-                !!errors.username ||
-                !!errors.passwordRT ||
-                !!errors.password ||
+                errors.email ||
+                errors.username ||
+                errors.passwordRT ||
+                errors.password ||
                 isSubmitting
               }
             >

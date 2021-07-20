@@ -1,3 +1,4 @@
+import React from "react";
 const SearchInput = (props) => {
   const onFocus = (evt) => {
     evt.target.style.borderColor = "#0c4e87";

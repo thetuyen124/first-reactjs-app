@@ -35,6 +35,12 @@
   height: 30px;
   border-color: darkkhaki;
 }
+.sign-form {
+  width: 90%;
+  max-width: 400px;
+  margin: auto;
+}
+
 @media screen and (max-width: 1500px) {
   .mainContent {
     width: 60%;
