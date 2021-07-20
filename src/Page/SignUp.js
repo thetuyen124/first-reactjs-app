@@ -1,14 +1,7 @@
 import { useEffect } from "react";
 
 import { Formik } from "formik";
-import {
-  Form,
-  Button,
-  ButtonGroup,
-  ToggleButton,
-  InputGroup,
-  FormControl,
-} from "react-bootstrap";
+import { Form, Button, ButtonGroup, ToggleButton } from "react-bootstrap";
 const SignUp = () => {
   useEffect(() => {
     document.title = "Sign Up";
@@ -46,7 +39,7 @@ const SignUp = () => {
             errors.username = "Required";
           } else if (values.username.length <= 3) {
             errors.username = "Almost 4 character";
-          } else if (!/^[A-Za-z0-9]/i.test(values.username)) {
+          } else if (!/^[0-9a-zA-Z_.]+$/.test(values.username)) {
             errors.username = "Invalid email username";
           }
 
@@ -157,25 +150,31 @@ const SignUp = () => {
                 {errors.passwordRT}
               </Form.Control.Feedback>
             </Form.Group>
-            <ButtonGroup className="mb-2">
-              <ToggleButton
-                className="mb-2"
-                checked={values.checked}
-                id="toggle-check"
-                name="checked"
-                onChange={handleChange}
-                type="checkbox"
-                variant="outline-primary"
-                value="1"
-              >
-                I have read agreement
-              </ToggleButton>
-            </ButtonGroup>
+            <ToggleButton
+              className="mb-2"
+              checked={values.checked}
+              id="toggle-check"
+              name="checked"
+              onChange={handleChange}
+              type="checkbox"
+              variant="secondary"
+              value="1"
+              style={{ border: 0, backgroundColor: "unset", color: "black" }}
+            >
+              I have read agreement
+            </ToggleButton>
             <br />
             <Button
               variant="primary"
               type="submit"
-              disabled={!values.checked || isSubmitting}
+              disabled={
+                !values.checked ||
+                !!errors.email ||
+                !!errors.username ||
+                !!errors.passwordRT ||
+                !!errors.password ||
+                isSubmitting
+              }
             >
               Submit
             </Button>
