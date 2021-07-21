@@ -15,7 +15,7 @@ const App = () => {
       <Router>
         <Header />
         <Content />
-        <BackTop />
+        <BackTop duration={300} />
         <Footer />
       </Router>
     </>

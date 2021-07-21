@@ -1,11 +1,15 @@
 import axios from "axios";
 
 import { Formik } from "formik";
-
+import { useEffect } from "react";
 import React from "react";
 import { Form, Button } from "react-bootstrap";
 
 const Login = (props) => {
+  useEffect(() => {
+    document.title = "Login";
+  }, []);
+
   return (
     <div className="mainContent container">
       <Formik

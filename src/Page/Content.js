@@ -10,6 +10,7 @@ import PostDetail from "./PostDetail";
 import SignUp from "./SignUp";
 import EditPost from "./EditPost";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
+import TestJwt from "../components/TestJwt";
 
 const Content = (props) => {
   return (
@@ -26,6 +27,9 @@ const Content = (props) => {
       </Route>
       <Route path="/signup">
         <SignUp />
+      </Route>
+      <Route path="/test">
+        <TestJwt />
       </Route>
     </Switch>
   );

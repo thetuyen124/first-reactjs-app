@@ -2,7 +2,6 @@ import { Spin } from "antd";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Login from "./Login";
 import React from "react";
 
 const PostDetail = (props) => {
@@ -26,9 +25,7 @@ const PostDetail = (props) => {
   useEffect(() => {
     document.title = post.title;
   }, [post.title]);
-  if (localStorage.getItem("token") === null) {
-    return <Login message="You need to login to continue" />;
-  }
+
   if (isLoading) {
     return (
       <div style={{ textAlign: "center", marginBottom: 50 }}>
