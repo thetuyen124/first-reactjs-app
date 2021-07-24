@@ -1,11 +1,12 @@
-import axios from "axios";
-
 import { Formik } from "formik";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
+import { Alert } from "antd";
 
 const Login = (props) => {
+  const [submitError, setSubmitError] = useState("");
   useEffect(() => {
     document.title = "Login";
   }, []);
@@ -18,30 +19,35 @@ const Login = (props) => {
           const errors = {};
           if (!values.email) {
             errors.email = "Required";
-          } else if (
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-          ) {
-            errors.email = "Invalid email address";
           }
           if (!values.password) {
             errors.password = "Required";
-          } else if (values.password.length <= 7) {
-            errors.password = "Almost 8 character";
           }
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          axios
-            .get("https://60dff0ba6b689e001788c858.mockapi.io/token")
+          axios({
+            method: "POST",
+            url: "http://localhost:8080/authenticate",
+            headers: {},
+            data: {
+              username: values.email,
+              password: values.password,
+            },
+          })
             .then((response) => {
-              localStorage.clear();
-              localStorage.setItem("token", response.data.token);
-              localStorage.setItem("userId", response.data.userId);
               setSubmitting(false);
+              console.log(response);
+              localStorage.clear();
+              localStorage.setItem("token", response.data.jwttoken);
               window.location.href = "/";
             })
             .catch((error) => {
+              setSubmitting(false);
               console.log(error);
+              setSubmitError(
+                "Login fails status code: " + error.response.status
+              );
             });
         }}
       >
@@ -59,7 +65,7 @@ const Login = (props) => {
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
-                type="email"
+                type="text"
                 isInvalid={errors.email && touched.email}
                 name="email"
                 placeholder="Enter email"
@@ -89,6 +95,15 @@ const Login = (props) => {
                 {errors.password}
               </Form.Control.Feedback>
             </Form.Group>
+            {submitError && (
+              <Alert
+                closable
+                style={{ marginBottom: 15 }}
+                message={submitError}
+                type="error"
+                showIcon
+              />
+            )}
 
             <Button variant="primary" type="submit" disabled={isSubmitting}>
               Submit

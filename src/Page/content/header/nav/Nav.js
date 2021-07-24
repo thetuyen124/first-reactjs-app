@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import React from "react";
 import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
+import { useJwt } from "react-jwt";
 import "./Nav.css";
 
 const logo =
@@ -11,6 +12,7 @@ const Nav = (props) => {
   const [click, setClick] = useState(false);
   const [token, setToken] = useState(localStorage.getItem("token"));
 
+  const { isExpired, reEvaluateToken } = useJwt(token);
   const handleClick = () => {
     setClick(!click);
     if (!click) {
@@ -51,16 +53,11 @@ const Nav = (props) => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link onClick={close} to="/post">
-                Post
+              <Link onClick={close} to="/admin">
+                Admin page
               </Link>
             </li>
-            <li className="nav-item">
-              <Link onClick={close} to="/profile">
-                Profile
-              </Link>
-            </li>
-            {token === null ? (
+            {token === null || isExpired ? (
               <>
                 <li className="nav-item">
                   <Link onClick={close} to="/login">
@@ -80,6 +77,7 @@ const Nav = (props) => {
                   close();
                   localStorage.clear();
                   setToken(null);
+                  reEvaluateToken(null);
                   window.location.href = "/login";
                 }}
               >

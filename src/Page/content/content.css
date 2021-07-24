@@ -1,6 +1,6 @@
 .mainContent {
   margin: auto;
-  width: 85%;
+  width: 70%;
 }
 .mainContent span {
   font-size: 15px;
@@ -40,6 +40,8 @@
   margin: auto;
 }
 
+.list-posts {
+}
 .list-posts .title {
   color: rgb(0, 0, 0, 0.7);
   display: block;

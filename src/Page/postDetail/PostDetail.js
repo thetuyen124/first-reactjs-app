@@ -1,8 +1,8 @@
 import { Spin } from "antd";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import React from "react";
+import httpClientGet from "../../customHook/httpClientGet";
 
 const PostDetail = (props) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -10,16 +10,17 @@ const PostDetail = (props) => {
   let { id } = useParams();
 
   useEffect(() => {
-    axios
-      .get(`https://jsonplaceholder.typicode.com/posts/${id}`)
-      .then((response) => {
+    httpClientGet(`http://localhost:8080/api/v1/posts/view/?id=${id}`).get.then(
+      (response) => {
         setPost({
           id: response.data.id,
           title: response.data.title,
-          body: response.data.body,
+          description: response.data.description,
+          content: response.data.content,
         });
         setIsLoading(false);
-      });
+      }
+    );
   }, [id]);
 
   useEffect(() => {
@@ -37,7 +38,11 @@ const PostDetail = (props) => {
     <div className="mainContent">
       <div>Id: {post.id}</div>
       <div className="title">Title: {post.title}</div>
-      <div className="content">Body: {post.body}</div>
+      <div className="description">Description: {post.description}</div>
+      <div
+        className="content"
+        dangerouslySetInnerHTML={{ __html: post.content }}
+      />
     </div>
   );
 };

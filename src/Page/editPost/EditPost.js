@@ -1,32 +1,46 @@
 import { Spin } from "antd";
+import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Formik } from "formik";
 import { Form, Button } from "react-bootstrap";
 
-import axios from "axios";
 import React from "react";
+import httpClientGet from "../../customHook/httpClientGet";
+import { useJwt } from "react-jwt";
+import Login from "../login/Login";
+import JoditEditor from "jodit-react";
 
 const EditPost = () => {
+  const token = localStorage.getItem("token");
+  const { isExpired } = useJwt(token);
   const [isLoading, setIsLoading] = useState(true);
-  const [post, setPost] = useState({ id: null, title: null, body: null });
+  const [content, setContent] = useState("<div></div>");
+  const [post, setPost] = useState({
+    id: null,
+    title: null,
+    description: null,
+  });
   let { id } = useParams();
   useEffect(() => {
     document.title = "Edit post";
   }, []);
   useEffect(() => {
-    axios
-      .get(`https://jsonplaceholder.typicode.com/posts/${id}`)
-      .then((response) => {
+    httpClientGet(`http://localhost:8080/api/v1/posts/view?id=${id}`).get.then(
+      (response) => {
         setPost({
           id: response.data.id,
           title: response.data.title,
-          body: response.data.body,
+          description: response.data.description,
         });
+        setContent(response.data.content);
         setIsLoading(false);
-      });
+      }
+    );
   }, [id]);
-
+  if (isExpired) {
+    return <Login />;
+  }
   if (isLoading) {
     return (
       <div style={{ textAlign: "center", marginBottom: 50 }}>
@@ -39,32 +53,45 @@ const EditPost = () => {
       initialValues={{
         id: post.id,
         title: post.title,
-        description: "",
-        content: post.body,
+        description: post.description,
       }}
       validate={(values) => {
         const errors = {};
         if (!values.title) {
           errors.title = "Required";
         }
-
-        if (!values.content) {
-          errors.content = "Required";
-        }
         if (!values.description) {
           errors.description = "Required";
         }
-
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-          setTimeout(() => {
+        const headers = {
+          Authorization: `Bearer ${token}`,
+        };
+        axios
+          .post(
+            `http://localhost:8080/api/v1/author/update?id=${id}`,
+            {
+              title: values.title,
+              description: values.description,
+              content: String(content),
+            },
+            {
+              headers: headers,
+            }
+          )
+          .then((response) => {
+            setSubmitting(false);
             window.location.href = "/post/" + id;
-          }, 200);
-        }, 400);
+          })
+          .catch((error) => {
+            setSubmitting(false);
+            console.log(error.response.status);
+            if (error.response.status === 403) {
+              window.location.href = "/403";
+            }
+          });
       }}
     >
       {({
@@ -110,22 +137,13 @@ const EditPost = () => {
                 {errors.description}
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Example textarea</Form.Label>
-              <Form.Control
-                as="textarea"
-                name="content"
-                value={values.content}
-                rows={10}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                isInvalid={touched.content && errors.content}
-              />
-              <Form.Control.Feedback type="invalid">
-                {errors.content}
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Button variant="primary" type="submit">
+            <JoditEditor
+              value={content}
+              tabIndex={1} // tabIndex of textarea
+              onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+              onChange={(newContent) => {}}
+            />
+            <Button variant="primary" type="submit" disabled={isSubmitting}>
               Update
             </Button>
           </Form>

@@ -1,19 +1,17 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Spin, Empty } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 import { Pagination } from "antd";
 
-import SearchInput from "../components/searchInput/SearchInput";
-import Login from "./Login";
+import Login from "../login/Login";
 
 import "antd/dist/antd.css";
+import httpClientGet from "../../customHook/httpClientGet";
 
 const Post = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [listPost, setListPost] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   useEffect(() => {
@@ -21,9 +19,8 @@ const Post = () => {
   }, []);
 
   useEffect(() => {
-    axios
-      .get("https://jsonplaceholder.typicode.com/posts")
-      .then(function (response) {
+    httpClientGet("http://localhost:8080/api/v1/posts")
+      .get.then(function (response) {
         setIsLoading(false);
         setListPost(response.data);
       })
@@ -52,7 +49,6 @@ const Post = () => {
   if (listPost.length === 0) {
     return (
       <div className="mainContent">
-        <SearchInput searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <Empty />
       </div>
     );
@@ -87,7 +83,7 @@ const Post = () => {
         style={{ margin: "auto", width: "70%" }}
         defaultCurrent={currentPage}
         onChange={handlePageChange}
-        total={100}
+        total={listPost.length}
       />
     </div>
   );
