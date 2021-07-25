@@ -13,7 +13,6 @@ const AdminPage = () => {
       const myToken = decodeToken(token);
       const role = myToken.role.map((r) => r.authority);
       setIsAdmin(role.filter((r) => r.includes("ADMIN")).length !== 0);
-      console.log(isAdmin);
     }
   }, [isAdmin]);
   useEffect(() => {

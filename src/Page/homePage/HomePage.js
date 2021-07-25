@@ -21,23 +21,32 @@ const HomePage = () => {
       setIsAuthor(role.filter((r) => r.includes("AUTHOR")).length !== 0);
     }
   }, []);
+
   useEffect(() => {
     document.title = "Post";
   }, []);
 
   useEffect(() => {
+    setIsLoading(true);
+    let didCancel = false;
     httpClientGet(
       "http://localhost:8080/api/v1/posts/search?searchTearm=" + searchText
     )
       .get.then(function (response) {
-        setIsLoading(false);
-        setListPost(response.data);
+        if (!didCancel) {
+          setListPost(response.data);
+          setIsLoading(false);
+        }
+        console.log(didCancel);
       })
       .catch(function (error) {
         // handle error
-        console.log(error);
         setIsLoading(false);
+        console.log(error);
       });
+    return () => {
+      didCancel = true;
+    };
   }, [searchText]);
 
   const handlePageChange = (page, pageS) => {

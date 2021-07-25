@@ -36,9 +36,7 @@ const PostDetail = (props) => {
   }
   return (
     <div className="mainContent">
-      <div>Id: {post.id}</div>
-      <div className="title">Title: {post.title}</div>
-      <div className="description">Description: {post.description}</div>
+      <div className="title">{post.title}</div>
       <div
         className="content"
         dangerouslySetInnerHTML={{ __html: post.content }}

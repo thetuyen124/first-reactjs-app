@@ -3,7 +3,7 @@
   position: fixed;
   width: 100%;
   transition: 0.7s cubic-bezier(0.28, 1.24, 0.76, 0.99);
-  z-index: 2;
+  z-index: 5;
   color: #0087a1;
 }
 .navbar-logo {
