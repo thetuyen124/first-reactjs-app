@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { decodeToken } from "react-jwt";
-import httpClientGet from "../../customHook/httpClientGet";
+import { httpClient } from "../../customHook/httpClient";
 import Error403 from "../error403/Error403";
 
 const token = localStorage.getItem("token");
@@ -16,11 +16,9 @@ const AdminPage = () => {
     }
   }, [isAdmin]);
   useEffect(() => {
-    httpClientGet(
-      "http://localhost:8080/api/v1/admin/post/statistic?author=BillGate"
-    )
-      .get.then((response) => {
-        console.log(response);
+    httpClient
+      .get("api/v1/admin/post/statistic?author=BillGate")
+      .then((response) => {
         setData(response.data);
       })
       .catch((errors) => {

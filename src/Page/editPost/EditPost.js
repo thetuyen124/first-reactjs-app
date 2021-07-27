@@ -1,16 +1,15 @@
+import React from "react";
 import { Spin } from "antd";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Formik } from "formik";
 import { Form, Button } from "react-bootstrap";
-
-import React from "react";
-import httpClientGet from "../../customHook/httpClientGet";
 import { useJwt } from "react-jwt";
-import Login from "../login/Login";
 import JoditEditor from "jodit-react";
 import Modal from "antd/lib/modal/Modal";
+
+import Login from "../login/Login";
+import { httpClient } from "../../customHook/httpClient";
 
 const EditPost = () => {
   const token = localStorage.getItem("token");
@@ -33,14 +32,8 @@ const EditPost = () => {
   const onDelete = () => {
     setShow(false);
     setIsLoading(true);
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-    axios({
-      method: "DELETE",
-      url: `http://localhost:8080/api/v1/author/deletepost?id=${id}`,
-      headers: headers,
-    })
+    httpClient
+      .delete(`api/v1/author/deletepost?id=${id}`)
       .then((response) => {
         setIsLoading(false);
         console.log(response);
@@ -53,8 +46,9 @@ const EditPost = () => {
   };
 
   useEffect(() => {
-    httpClientGet(`http://localhost:8080/api/v1/posts/view?id=${id}`)
-      .get.then((response) => {
+    httpClient
+      .get(`api/v1/posts/view?id=${id}`)
+      .then((response) => {
         setPost({
           id: response.data.id,
           title: response.data.title,
@@ -96,21 +90,12 @@ const EditPost = () => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          const headers = {
-            Authorization: `Bearer ${token}`,
-          };
-          axios
-            .post(
-              `http://localhost:8080/api/v1/author/update?id=${id}`,
-              {
-                title: values.title,
-                description: values.description,
-                content: String(content),
-              },
-              {
-                headers: headers,
-              }
-            )
+          httpClient
+            .post(`api/v1/author/update?id=${id}`, {
+              title: values.title,
+              description: values.description,
+              content: String(content),
+            })
             .then((response) => {
               setSubmitting(false);
               window.location.href = "/post/" + id;

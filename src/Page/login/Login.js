@@ -1,10 +1,9 @@
+import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
-import { useEffect, useState } from "react";
-import React from "react";
 import { Form, Button } from "react-bootstrap";
-import axios from "axios";
 import { Alert } from "antd";
 
+import { httpClient } from "../../customHook/httpClient";
 const Login = (props) => {
   const [submitError, setSubmitError] = useState("");
   useEffect(() => {
@@ -26,15 +25,11 @@ const Login = (props) => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          axios({
-            method: "POST",
-            url: "http://localhost:8080/authenticate",
-            headers: {},
-            data: {
+          httpClient
+            .post("authenticate", {
               username: values.email,
               password: values.password,
-            },
-          })
+            })
             .then((response) => {
               setSubmitting(false);
               console.log(response);

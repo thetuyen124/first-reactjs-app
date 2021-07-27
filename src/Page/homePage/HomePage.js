@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import httpClientGet from "../../customHook/httpClientGet";
 import { Empty, Input, Pagination, Spin } from "antd";
 import { Link } from "react-router-dom";
 import { decodeToken } from "react-jwt";
+import { httpClient } from "../../customHook/httpClient";
 
 const token = localStorage.getItem("token");
 const HomePage = () => {
@@ -29,15 +29,13 @@ const HomePage = () => {
   useEffect(() => {
     setIsLoading(true);
     let didCancel = false;
-    httpClientGet(
-      "http://localhost:8080/api/v1/posts/search?searchTearm=" + searchText
-    )
-      .get.then(function (response) {
+    httpClient
+      .get("api/v1/posts/search?searchTerm=" + searchText)
+      .then(function (response) {
         if (!didCancel) {
           setListPost(response.data);
           setIsLoading(false);
         }
-        console.log(didCancel);
       })
       .catch(function (error) {
         // handle error
@@ -52,7 +50,6 @@ const HomePage = () => {
   const handlePageChange = (page, pageS) => {
     setCurrentPage(parseInt(page));
     setPageSize(pageS);
-    console.log(page, pageS);
   };
 
   return (
